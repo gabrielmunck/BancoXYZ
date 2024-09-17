@@ -5,14 +5,14 @@ import { router } from "expo-router";
 
 
 const AuthContext = createContext<{
-    signIn: ({ email, password }: { email: string; password: string }) => void;
+    signIn: ({ email, password }: { email: string; password: string }) => Promise<boolean>;
     signOut: () => void;
     isLoggedIn: boolean;
     isLoading: boolean;
     user: any;
     token: string;
 }>({
-    signIn: () => null,
+    signIn: () => Promise.resolve(false),
     signOut: () => null,
     isLoggedIn: false,  
     isLoading: false,
@@ -40,28 +40,26 @@ export function SessionProvider({ children }: PropsWithChildren) {
     const [user, setUser] = useState({ name: "", email: "" });
     const [token, setToken] = useState("");
 
-    // Função para lidar com o processo de login
-    const signIn = async ({ email, password }: { email: string; password: string }) => {
+    const signIn = async ({ email, password }: { email: string; password: string }): Promise<boolean> => {
         try {
             setIsLoading(true);
-            // Faz uma requisição POST para a API de login
             const response = await axios.post("https://qf5k9fspl0.execute-api.us-east-1.amazonaws.com/default/login", {
                 email,
                 password,
             });
-            // Verifica a resposta da API
             if (response.data.token) {
                 Alert.alert("Sucesso", "Login realizado com sucesso!");
                 setIsLoggedIn(true);
                 setUser(response.data.user);
                 setToken(response.data.token);
+                return true;
             } else {
                 Alert.alert("Erro", "Credenciais inválidas");
+                return false;
             }
-            console.log("API Response:", response.data);
         } catch (error) {
             Alert.alert("Erro", "Ocorreu um erro ao fazer login");
-            
+            return false;
         } finally {
             setIsLoading(false);
         }
@@ -73,6 +71,8 @@ export function SessionProvider({ children }: PropsWithChildren) {
                 signIn,
                 signOut: () => {
                     setIsLoggedIn(false);
+                    setUser({ name: "", email: "" });
+                    setToken("");
                     router.push('/');
                     console.log("Logout realizado com sucesso!", isLoggedIn);
                 },

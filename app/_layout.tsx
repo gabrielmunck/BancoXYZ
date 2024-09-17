@@ -5,6 +5,8 @@ function StackNavigator() {
     const { isLoggedIn } = useSession();
     console.log("Current isLoggedIn state:", isLoggedIn);
 
+    
+
     return (
         <Stack>
             {!isLoggedIn ? (

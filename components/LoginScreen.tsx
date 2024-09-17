@@ -4,9 +4,11 @@ import { useSession } from '@/context/SessionContext';
 import { useRouter } from "expo-router";
 
 const LoginScreen = () => {
-    const { signIn, isLoading, isLoggedIn  } = useSession();
+    const { signIn, isLoading, isLoggedIn } = useSession();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
     const router = useRouter();
 
     useEffect(() => {
@@ -14,6 +16,42 @@ const LoginScreen = () => {
             router.push('/Home'); // Navega para a página "Home"
         }
     }, [isLoggedIn]);
+
+    // Função para validar os campos de entrada
+    const validateInputs = () => {
+        let isValid = true;
+        
+        if (!email) {
+            setEmailError("Um email é necessário para ter acesso");
+            isValid = false;
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            setEmailError("O Email esta incorreto");
+            isValid = false;
+        } else {
+            setEmailError("");
+        }
+
+        if (!password) {
+            setPasswordError("Uma senha é necessária para ter acesso");
+            isValid = false;
+        } else if (password.length < 4) {
+            setPasswordError("A senha precisa no minimo 4 caracteres");
+            isValid = false;
+        } else {
+            setPasswordError("");
+        }
+
+        return isValid;
+    };
+
+    const handleSignIn = async () => {
+        if (validateInputs()) {
+            const result = await signIn({ email, password });
+            if (!result) {
+                setPasswordError("Senha incorreta. Por favor, tente novamente.");
+            }
+        }
+    };
 
     return (
         <View style={styles.container}>
@@ -30,6 +68,7 @@ const LoginScreen = () => {
                         value={email}
                         onChangeText={setEmail}
                     />
+                    {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
                     <Text style={styles.label}>Senha</Text>
                     <TextInput
                         style={styles.input}
@@ -38,9 +77,10 @@ const LoginScreen = () => {
                         onChangeText={setPassword}
                         secureTextEntry
                     />
+                    {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
                     <Pressable
                         style={styles.button}
-                        onPress={() => signIn({ email, password })}
+                        onPress={handleSignIn}
                     >
                         <Text style={styles.buttonText}>Entrar</Text>
                     </Pressable>
@@ -74,6 +114,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 20,
         paddingLeft: 8,
+    },
+    errorText: {
+        color: 'red',
+        fontSize: 14,
+        marginBottom: 10,
     },
     label: {
         fontSize: 16,
