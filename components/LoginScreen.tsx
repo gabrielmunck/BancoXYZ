@@ -54,87 +54,126 @@ const LoginScreen = () => {
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Banco XYZ</Text>
-            
-            {isLoading ? (
-                <ActivityIndicator size="large" color="#0000ff" />
-            ) : (
-                <>
-                    <Text style={styles.label}>Login</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Usuário"
-                        value={email}
-                        onChangeText={setEmail}
-                    />
-                    {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
-                    <Text style={styles.label}>Senha</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Senha"
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry
-                    />
-                    {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
-                    <Pressable
-                        style={styles.button}
-                        onPress={handleSignIn}
-                    >
-                        <Text style={styles.buttonText}>Entrar</Text>
-                    </Pressable>
-                </>
-            )}
+        <View style={styles.mainContainer}>
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <Text style={styles.title}>BancoXYZ</Text>
+                </View>
+                <View style={styles.contentContainer}>
+                    {isLoading ? (
+                        <ActivityIndicator size="large" color="#ECDFCC" />
+                    ) : (
+                        <>
+                            <Text style={styles.label}>Login</Text>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Usuário"
+                                placeholderTextColor="#ECDFCC"
+                                value={email}
+                                onChangeText={setEmail}
+                            />
+                            {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
+                            <Text style={styles.label}>Senha</Text>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Senha"
+                                placeholderTextColor="#ECDFCC"
+                                value={password}
+                                onChangeText={setPassword}
+                                secureTextEntry
+                            />
+                            {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
+                            <Pressable
+                                style={styles.button}
+                                onPress={handleSignIn}
+                            >
+                                <Text style={styles.buttonText}>Entrar</Text>
+                            </Pressable>
+                        </>
+                    )}
+                </View>
+                <View style={styles.footer}>
+                    <Text style={styles.footerText}>Precisa de ajuda? Click aqui e fale conosco.</Text>
+                </View>
+            </View>
         </View>
     );
 };
 
-// Estilos para o componente
 const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        backgroundColor: "#181C14",
+    },
     container: {
         flex: 1,
         width: "80%",
-        maxWidth: 400,
-        justifyContent: "center",
-        padding: 16,
+        backgroundColor: "#3C3D37",
     },
-    title: {
+    header: {
+        height: 100,
+        backgroundColor: "#697565",
         display: "flex",
         justifyContent: "center",
-        textAlign: "center",
-        fontSize: 36,
+        alignItems: "center",
+    },
+    title: {
+        color: "#ECDFCC",
+        fontSize: 32,
         fontWeight: "bold",
-        marginBottom: 24,
+    },
+    contentContainer: {
+        paddingHorizontal: 20,
+        paddingTop: 100,
+        flex: 1,
+    },
+    label: {
+        fontSize: 18,
+        color: "#ECDFCC",
+        fontWeight: "bold",
+        marginBottom: 10,
     },
     input: {
         height: 40,
-        borderColor: "gray",
-        borderTopStartRadius: 10,
+        borderColor: "#697565",
         borderWidth: 1,
         marginBottom: 20,
         paddingLeft: 8,
+        color: "#ECDFCC",
+        backgroundColor: "#697565",
+        borderRadius: 5,
     },
     errorText: {
-        color: 'red',
+        color: '#FF3B30',
         fontSize: 14,
         marginBottom: 10,
     },
-    label: {
-        fontSize: 16,
-        fontWeight: "bold",
-        marginBottom: 12,
-    },
     button: {
-        backgroundColor: '#007AFF',
-        padding: 10,
+        backgroundColor: '#697565',
+        padding: 15,
         borderRadius: 5,
         alignItems: 'center',
+        marginTop: 20,
     },
     buttonText: {
-        color: 'white',
+        color: '#ECDFCC',
         fontSize: 16,
         fontWeight: 'bold',
+    },
+    footer: {
+        height: 60,
+        backgroundColor: "#697565",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    footerText: {
+        color: '#ECDFCC',
+        fontSize: 16,
+        fontWeight: '100',
     },
 });
 

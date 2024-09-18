@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable, TouchableOpacity } from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    Pressable,
+    TouchableOpacity,
+} from "react-native";
 import { useSession } from "@/context/SessionContext";
-import { Ionicons } from '@expo/vector-icons'; // Assuming you're using Expo
+import { Ionicons } from "@expo/vector-icons"; // Assuming you're using Expo
 
 const Home: React.FC = () => {
     const { signOut, user, accountInfo, fetchAccountInfo } = useSession();
@@ -10,78 +16,140 @@ const Home: React.FC = () => {
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
         fetchAccountInfo();
-        
-    }
+    };
+
 
     return (
         <View style={styles.maincontainer}>
             <View style={styles.container}>
-                <Text style={styles.title}>BancoXYZ</Text>
+                <View style={styles.header}>
+                    <Text style={styles.title}>BancoXYZ</Text>
+                </View>
                 <View style={styles.contentContainer}>
                     <Text style={styles.greeting}>Olá, {user.name}!</Text>
-
-                    <View style={styles.balanceContainer}>
-                        <Text style={styles.balanceText}>
-                            Seu saldo: {isVisible ? `${accountInfo.currency} ${accountInfo.accountBalance}` : '********'}
-                        </Text>
-                        <TouchableOpacity onPress={toggleVisibility} style={styles.eyeButton}>
-                            <Ionicons name={isVisible ? "eye-off" : "eye"} size={24} color="black" />
-                        </TouchableOpacity>
+                    <View style={styles.firstContainer}>
+                        <Text style={styles.balanceLabel}>Seu saldo:{" "}</Text>
+                        <View style={styles.balanceContainer}>
+                            <Text style={styles.balanceText}>
+                                
+                                {isVisible
+                                    ? `${accountInfo.currency}: ${parseFloat(accountInfo.accountBalance.toString()).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                                    : "********"}
+                            </Text>
+                            <TouchableOpacity
+                                onPress={toggleVisibility}
+                                style={styles.eyeButton}
+                            >
+                                <Ionicons
+                                    name={isVisible ? "eye-off" : "eye"}
+                                    size={24}
+                                    color="#ECDFCC"
+                                />
+                            </TouchableOpacity>
+                        </View>
                     </View>
 
-                    <Pressable style={styles.logoutButton} onPress={signOut}>
-                        <Text style={styles.logoutButtonText}>Logout</Text>
-                    </Pressable>
+                    <View style={styles.secondContainer}>
+                        <Text style={styles.secondContainerText}>Transferencias</Text>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Pressable
+                            style={styles.logoutButton}
+                            onPress={signOut}
+                        >
+                            <Text style={styles.logoutButtonText}>Logout</Text>
+                        </Pressable>
+                    </View>
                 </View>
             </View>
         </View>
     );
 };
-
 const styles = StyleSheet.create({
     maincontainer: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
-        backgroundColor: "#F5FCFF",
+        backgroundColor: "#181C14",
     },
     container: {
         flex: 1,
         width: "80%",
-        backgroundColor: "#F5FCFF",
+        backgroundColor: "#3C3D37",
+    },
+    header: {
+        height: 100,
+        backgroundColor: "#697565",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 20,
     },
     title: {
-        fontSize: 24,
+        color: "#ECDFCC",
+        fontSize: 32,
         fontWeight: "bold",
-        textAlign: "center",
-        marginTop: 40,
-        marginBottom: 20,
     },
     contentContainer: {
         paddingHorizontal: 20,
     },
     greeting: {
-        fontSize: 18,
+        color: "#ECDFCC",
+        textAlign: "center",
+        fontSize: 24,
         marginBottom: 20,
+    },
+    firstContainer: {
+        marginTop: 20,
+        backgroundColor: "#697565",
+        padding: 20,
+        borderRadius: 10,
     },
     balanceContainer: {
         justifyContent: "space-between",
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: "row",
+        paddingHorizontal:0,
+        alignItems: "center",
         marginVertical: 10,
-        paddingRight: 100,
     },
     balanceText: {
-        fontSize: 18,
+        fontSize: 24,
+        color: "#ECDFCC",
+        fontWeight: "bold",
         marginRight: 10,
     },
+    balanceLabel: {
+        fontSize: 18,
+        color: "#ECDFCC",
+        fontWeight: "bold",
+    },
     eyeButton: {
-        padding: 5,
+        backgroundColor: "#3C3D37",
+        borderRadius: 100,
+        padding: 8,
+    },
+    buttonContainer: {
+        marginTop: 20,
+        width: "100%",
+    },
+
+    secondContainer: {
+        marginTop: 20,
+        backgroundColor: "#697565",
+        padding: 20,
+        borderRadius: 10,
+    },
+    secondContainerText: {
+        fontSize: 18,
+        color: "#ECDFCC",
+        fontWeight: "bold",
+        textAlign: "center",
     },
     logoutButton: {
+        justifyContent: "center",
         backgroundColor: "#FF3B30",
-        paddingVertical: 10,
+        paddingVertical: 6,
         borderRadius: 5,
     },
     logoutButtonText: {

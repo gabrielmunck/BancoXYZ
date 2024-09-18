@@ -12,7 +12,7 @@ function StackNavigator() {
             {!isLoggedIn ? (
                 <Stack.Screen name="index" options={{ headerShown: false }} />
             ) : (
-                <Stack.Screen name="Home" options={{ headerShown: true, title: "Home" }} />
+                <Stack.Screen name="Home" options={{ headerShown: false }} />
             )}
         </Stack>
     );

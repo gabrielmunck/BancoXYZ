@@ -68,7 +68,10 @@ export function SessionProvider({ children }: PropsWithChildren) {
                     },
                 }
             );
-            setAccountInfo(response.data);
+            setAccountInfo({
+                ...response.data,
+                accountBalance: parseFloat(response.data.accountBalance).toFixed(2)
+            });
         } catch (error) {
             Alert.alert("Erro", "Falha ao obter informações da conta");
         }
