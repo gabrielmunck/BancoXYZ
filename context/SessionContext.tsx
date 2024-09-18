@@ -1,23 +1,37 @@
-import { useState, useContext, createContext, type PropsWithChildren } from "react";
+import {
+    useState,
+    useContext,
+    createContext,
+    type PropsWithChildren,
+} from "react";
 import axios from "axios";
 import { Alert } from "react-native";
 import { router } from "expo-router";
 
-
 const AuthContext = createContext<{
-    signIn: ({ email, password }: { email: string; password: string }) => Promise<boolean>;
+    signIn: ({
+        email,
+        password,
+    }: {
+        email: string;
+        password: string;
+    }) => Promise<boolean>;
     signOut: () => void;
     isLoggedIn: boolean;
     isLoading: boolean;
     user: any;
     token: string;
+    fetchAccountInfo: () => void;
+    accountInfo: { currency: string; accountBalance: number };
 }>({
     signIn: () => Promise.resolve(false),
     signOut: () => null,
-    isLoggedIn: false,  
+    fetchAccountInfo: () => null,
+    isLoggedIn: false,
     isLoading: false,
     user: null,
     token: "",
+    accountInfo: { currency: "", accountBalance: 0 },
 });
 
 // This hook can be used to access the user info.
@@ -35,23 +49,48 @@ export function useSession() {
 }
 
 export function SessionProvider({ children }: PropsWithChildren) {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState({ name: "", email: "" });
     const [token, setToken] = useState("");
+    const [accountInfo, setAccountInfo] = useState({currency: "",accountBalance: 0,});
 
-    const signIn = async ({ email, password }: { email: string; password: string }): Promise<boolean> => {
+
+// Função que obtem o dinheiro em conta usando o token do usuario
+    const fetchAccountInfo = async () => {
+        console.log("Token:", token);
+        try {
+            const response = await axios.get(
+                "https://2k0ic4z7s5.execute-api.us-east-1.amazonaws.com/default/balance",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            setAccountInfo(response.data);
+        } catch (error) {
+            Alert.alert("Erro", "Falha ao obter informações da conta");
+        }
+    };
+
+
+    // Função que obtem e efetua o login do usuario
+    const signIn = async ({email,password,}: {email: string;password: string;}): Promise<boolean> => {
         try {
             setIsLoading(true);
-            const response = await axios.post("https://qf5k9fspl0.execute-api.us-east-1.amazonaws.com/default/login", {
-                email,
-                password,
-            });
+            const response = await axios.post(
+                "https://qf5k9fspl0.execute-api.us-east-1.amazonaws.com/default/login",
+                {
+                    email,
+                    password,
+                }
+            );
             if (response.data.token) {
-                Alert.alert("Sucesso", "Login realizado com sucesso!");
                 setIsLoggedIn(true);
                 setUser(response.data.user);
                 setToken(response.data.token);
+                Alert.alert("Sucesso", "Login realizado com sucesso!");
                 return true;
             } else {
                 Alert.alert("Erro", "Credenciais inválidas");
@@ -62,8 +101,11 @@ export function SessionProvider({ children }: PropsWithChildren) {
             return false;
         } finally {
             setIsLoading(false);
+            
         }
     };
+
+
 
     return (
         <AuthContext.Provider
@@ -73,13 +115,15 @@ export function SessionProvider({ children }: PropsWithChildren) {
                     setIsLoggedIn(false);
                     setUser({ name: "", email: "" });
                     setToken("");
-                    router.push('/');
+                    router.push("/");
                     console.log("Logout realizado com sucesso!", isLoggedIn);
                 },
+                fetchAccountInfo,
                 isLoggedIn,
                 isLoading,
                 user,
                 token,
+                accountInfo,
             }}
         >
             {children}
