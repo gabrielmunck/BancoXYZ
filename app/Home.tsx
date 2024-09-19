@@ -19,9 +19,6 @@ const Home: React.FC = () => {
         fetchAccountInfo();
     };
 
-    const handleTransferPress = () => {
-        router.push('/Transfer');
-    };
 
 
     return (
@@ -55,8 +52,13 @@ const Home: React.FC = () => {
                     </View>
 
                     <View style={styles.secondContainer}>
-                        <Pressable onPress={handleTransferPress}>
-                            <Text style={styles.secondContainerText}>Transferências</Text>
+                        <Pressable onPress={() => router.push("/NewTransfer")}>
+                            <Text style={styles.secondContainerText}>Nova Transferência</Text>
+                        </Pressable>
+                    </View>
+                    <View style={styles.thirdContainer}>
+                        <Pressable onPress={() => router.push("/TransferList")} >
+                            <Text style={styles.thirdContainerText}>Lista de Transferências</Text>
                         </Pressable>
                     </View>
                     <View style={styles.buttonContainer}>
@@ -64,7 +66,7 @@ const Home: React.FC = () => {
                             style={styles.logoutButton}
                             onPress={signOut}
                         >
-                            <Text style={styles.logoutButtonText}>Logout</Text>
+                            <Text style={styles.logoutButtonText}>Sair</Text>
                         </Pressable>
                     </View>
                 </View>
@@ -150,6 +152,18 @@ const styles = StyleSheet.create({
     secondContainerText: {
         fontSize: 18,
         color: "#ECDFCC",
+        fontWeight: "bold",
+        textAlign: "center",
+    },
+    thirdContainer: {
+        marginTop: 20,
+        backgroundColor: "#ECDFCC",
+        padding: 20,
+        borderRadius: 10,
+    },
+    thirdContainerText: {
+        fontSize: 18,
+        color: "#3C3D37",
         fontWeight: "bold",
         textAlign: "center",
     },
