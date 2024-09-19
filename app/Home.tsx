@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { router } from "expo-router";
 import {
     View,
     Text,
@@ -16,6 +17,10 @@ const Home: React.FC = () => {
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
         fetchAccountInfo();
+    };
+
+    const handleTransferPress = () => {
+        router.push('/Transfer');
     };
 
 
@@ -50,7 +55,9 @@ const Home: React.FC = () => {
                     </View>
 
                     <View style={styles.secondContainer}>
-                        <Text style={styles.secondContainerText}>Transferencias</Text>
+                        <Pressable onPress={handleTransferPress}>
+                            <Text style={styles.secondContainerText}>Transferências</Text>
+                        </Pressable>
                     </View>
                     <View style={styles.buttonContainer}>
                         <Pressable

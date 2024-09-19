@@ -48,7 +48,7 @@ const LoginScreen = () => {
         if (validateInputs()) {
             const result = await signIn({ email, password });
             if (!result) {
-                setPasswordError("Senha incorreta. Por favor, tente novamente.");
+                setPasswordError("Dados Incorretos. Por favor, tente novamente.");
             }
         }
     };
