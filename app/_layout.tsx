@@ -14,6 +14,7 @@ function StackNavigator() {
                 <Stack screenOptions={{headerShown: false}} >
                     <Stack.Screen name="Home" options={{ headerShown: false }} />
                     <Stack.Screen name="Transfer" options={{ headerShown: false }} />
+                    <Stack.Screen name="NewTransfer" options={{ headerShown: false }} />
                 </Stack>
                 
             )}

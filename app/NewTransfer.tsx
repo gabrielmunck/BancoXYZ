@@ -1,17 +1,81 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { useSession } from '../context/SessionContext';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 
 const NewTransfer: React.FC = () => {
     const [value, setValue] = useState('');
-    const [name, setName] = useState('');
+    const [document, setDocument] = useState('');
     const [date, setDate] = useState('');
+    const [valueError, setValueError] = useState('');
+    const [documentError, setDocumentError] = useState('');
+    const [dateError, setDateError] = useState('');
+    const { token } = useSession();
     const router = useRouter();
 
-    const handleSubmit = () => {
-        // Handle form submission logic here
-        console.log('Transfer submitted:', { value, name, date });
+    // Função para lidar com o envio do formulário
+    const handleSubmit = async () => {
+        const isValueValid = validateValue(value);
+        const isDocumentValid = validateDocument(document);
+        const isDateValid = validateDate(date);
+        if(isValueValid && isDocumentValid && isDateValid){
+            try {
+                const response = await axios.post(
+                'https://ofqx4zxgcf.execute-api.us-east-1.amazonaws.com/default/transfer',
+                {
+                    value: parseFloat(value),
+                    currency: 'USD',
+                    payeerDocument: document,
+                    transferDate: date.split('/').reverse().join('-') // Convertendo DD/MM/YYYY para YYYY-MM-DD
+                },
+                {
+                    headers: {
+                    Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+    
+            console.log('Transferencia feita com sucesso:', response.data);
+                router.push('/Home');
+            } catch (error) {
+                console.error('Erro na Transferencia:', error);
+            }
+        }
+    };
+
+    const validateValue = (val: string) => {
+        if (!val) {
+            setValueError('Valor é obrigatório');
+            return false;
+        }
+        if (isNaN(parseFloat(val)) || parseFloat(val) <= 0) {
+            setValueError('Valor deve ser um número positivo');
+            return false;
+        }
+        setValueError('');
+        return true;
+    };
+    
+    const validateDocument = (doc: string) => {
+        if (!doc) {
+            setDocumentError('Documento é obrigatório');
+            return false;
+        }
+        // Add more specific document validation if needed
+        setDocumentError('');
+        return true;
+    };
+    
+    const validateDate = (date: string) => {
+        const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+        if (!date || !regex.test(date)) {
+            setDateError('Data inválida. Use o formato DD/MM/YYYY, exemplo: 01/01/2023');
+            return false;
+        }
+        setDateError('');
+        return true;
     };
 
     return (
@@ -24,22 +88,25 @@ const NewTransfer: React.FC = () => {
                     value={value}
                     onChangeText={setValue}
                     placeholder="Digite o valor"
-                    keyboardType="numeric"
+                    inputMode='decimal'
                 />
-                <Text style={styles.label}>Nome do destinatário</Text>
+                {valueError ? <Text style={styles.errorText}>{valueError}</Text> : null}
+                <Text style={styles.label}>RG</Text>
                 <TextInput
                     style={styles.input}
-                    value={name}
-                    onChangeText={setName}
-                    placeholder="Digite o nome"
+                    value={document}
+                    onChangeText={setDocument}
+                    placeholder="Digite o documento"
                 />
+                {documentError ? <Text style={styles.errorText}>{documentError}</Text> : null}
                 <Text style={styles.label}>Data</Text>
                 <TextInput
                     style={styles.input}
                     value={date}
                     onChangeText={setDate}
-                    placeholder="DD/MM/AAAA"
+                    placeholder="DD/MM/YYYY"
                 />
+                {dateError ? <Text style={styles.errorText}>{dateError}</Text> : null}
                 <Pressable style={styles.button} onPress={handleSubmit}>
                     <Text style={styles.buttonText}>Transferir</Text>
                 </Pressable>
@@ -62,6 +129,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#181C14',
         padding: 20,
+        justifyContent: 'center',
     },
     title: {
         fontSize: 24,
@@ -87,11 +155,28 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 15,
     },
+    errorText: {
+        color: 'red',
+        backgroundColor: '#697565',
+        padding: 10,
+        borderRadius: 5,
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
     button: {
         backgroundColor: '#697565',
         padding: 15,
         borderRadius: 5,
         alignItems: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     buttonText: {
         color: '#ECDFCC',
