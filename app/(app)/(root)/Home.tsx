@@ -43,11 +43,13 @@ const Home: React.FC = () => {
                             <TouchableOpacity
                                 onPress={toggleVisibility}
                                 style={styles.eyeButton}
+                                testID="toggle-visibility"
                             >
                                 <Ionicons
                                     name={isVisible ? "eye-off" : "eye"}
                                     size={24}
                                     color="#ECDFCC"
+                                    
                                 />
                             </TouchableOpacity>
                         </View>
@@ -67,6 +69,7 @@ const Home: React.FC = () => {
                         <Pressable
                             style={styles.logoutButton}
                             onPress={signOut}
+                            testID="logout-button"
                         >
                             <Text style={styles.logoutButtonText}>Sair</Text>
                         </Pressable>

@@ -156,7 +156,7 @@ export function SessionProvider({ children }: PropsWithChildren) {
                     setIsLoggedIn(false);
                     setUser({ name: "", email: "" });
                     setToken("");
-                    router.push("/");
+                    router.push("/SignIn");
                     console.log("Logout realizado com sucesso!", isLoggedIn);
                 },
                 fetchAccountInfo,
