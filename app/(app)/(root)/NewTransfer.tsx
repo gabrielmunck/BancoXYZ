@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { useSession } from '../context/SessionContext';
+import { useSession } from '../../../context/SessionContext';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
@@ -37,10 +37,8 @@ const NewTransfer: React.FC = () => {
                 }
             );
     
-            console.log('Transferencia feita com sucesso:', response.data);
                 router.push('/Home');
             } catch (error) {
-                console.error('Erro na Transferencia:', error);
             }
         }
     };

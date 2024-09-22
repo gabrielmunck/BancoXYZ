@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { router } from "expo-router";
 import {
     View,
@@ -11,13 +11,15 @@ import { useSession } from "@/context/SessionContext";
 import { Ionicons } from "@expo/vector-icons"; // Assuming you're using Expo
 
 const Home: React.FC = () => {
-    const { signOut, user, accountInfo, fetchAccountInfo } = useSession();
+    const { isLoggedIn, signOut, user, accountInfo, fetchAccountInfo } = useSession();
     const [isVisible, setIsVisible] = useState(false);
 
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
         fetchAccountInfo();
     };
+
+
 
 
 
