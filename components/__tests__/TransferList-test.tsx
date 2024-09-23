@@ -30,7 +30,7 @@ jest.mock("expo-router", () => ({
     useRouter: jest.fn(),
 }));
 
-// Mock any other dependencies used in TransferList
+// Mock e outras dependências
 
 describe("<TransferList />", () => {
     it("Renderiza corretamente", () => {

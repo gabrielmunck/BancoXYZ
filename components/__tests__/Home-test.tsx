@@ -22,7 +22,7 @@ jest.mock("expo-router", () => ({
 }));
 
 describe("<Home />", () => {
-    it("renders main elements correctly", () => {
+    it("Renderiza corretamente", () => {
         const { getByText } = render(
             <SessionProvider>
                 <Home />
@@ -37,7 +37,7 @@ describe("<Home />", () => {
         expect(getByText("Sair")).toBeTruthy();
     });
 
-    it("toggles balance visibility", () => {
+    it("Alterna visibilidade do saldo", () => {
         const { getByText, getByTestId } = render(
             <SessionProvider>
                 <Home />
@@ -52,7 +52,7 @@ describe("<Home />", () => {
         expect(getByText("USD: 1.000,50")).toBeTruthy();
     });
 
-    it("navigates to New Transfer screen", () => {
+    it("Navega para a tela de nova transferência", () => {
         const { getByText } = render(
             <SessionProvider>
                 <Home />
@@ -66,7 +66,7 @@ describe("<Home />", () => {
         );
     });
 
-    it("navigates to Transfer List screen", () => {
+    it("Navega para a tela de lista de transferências", () => {
         const { getByText } = render(
             <SessionProvider>
                 <Home />
@@ -80,7 +80,7 @@ describe("<Home />", () => {
         );
     });
 
-    it("calls signOut function when logout button is pressed", () => {
+    it("Chama a funcao signOut quando logout button é pressionado", () => {
         const { getByText } = render(
             <SessionProvider>
                 <Home />
