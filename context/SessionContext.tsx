@@ -46,7 +46,7 @@ const AuthContext = createContext<{
     accountInfo: { currency: "", accountBalance: 0 },
 });
 
-// This hook can be used to access the user info.
+// Esse hook é usado para acessar o contexto
 export function useSession() {
     const value = useContext(AuthContext);
     if (process.env.NODE_ENV !== "production") {
@@ -74,7 +74,6 @@ export function SessionProvider({ children }: PropsWithChildren) {
 
     // Função que obtem o dinheiro em conta usando o token do usuario
     const fetchAccountInfo = async () => {
-        console.log("Token:", token);
         try {
             const response = await axios.get(
                 "https://2k0ic4z7s5.execute-api.us-east-1.amazonaws.com/default/balance",
@@ -97,7 +96,6 @@ export function SessionProvider({ children }: PropsWithChildren) {
 
     // Função que obtem o historico de transações do usuario
     const fetchTransactionHistory = async () => {
-        console.log("Token transações:", token);
         try {
             const response = await axios.get(
                 "https://n0qaa2fx3c.execute-api.us-east-1.amazonaws.com/default/transferList",
@@ -157,7 +155,6 @@ export function SessionProvider({ children }: PropsWithChildren) {
                     setUser({ name: "", email: "" });
                     setToken("");
                     router.push("/SignIn");
-                    console.log("Logout realizado com sucesso!", isLoggedIn);
                 },
                 fetchAccountInfo,
                 fetchTransactionHistory,

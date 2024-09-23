@@ -43,7 +43,7 @@ const NewTransfer: React.FC = () => {
         }
     };
 
-    const validateValue = (val: string) => {
+    const validateValue = (val: string) => { // Função para validar o valor da transferência
         if (!val) {
             setValueError('Valor é obrigatório');
             return false;
@@ -56,7 +56,7 @@ const NewTransfer: React.FC = () => {
         return true;
     };
     
-    const validateDocument = (doc: string) => {
+    const validateDocument = (doc: string) => { // Função para validar o documento do destinatário
         if (!doc) {
             setDocumentError('Documento é obrigatório');
             return false;
@@ -66,7 +66,7 @@ const NewTransfer: React.FC = () => {
         return true;
     };
     
-    const validateDate = (date: string) => {
+    const validateDate = (date: string) => { // Função para validar a data e o formato da transferência usando regex
         const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
         if (!date || !regex.test(date)) {
             setDateError('Data inválida. Use o formato DD/MM/YYYY, exemplo: 01/01/2023');

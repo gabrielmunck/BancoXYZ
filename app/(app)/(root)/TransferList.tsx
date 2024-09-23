@@ -13,7 +13,7 @@ const Transfer = () => {
     const router = useRouter();
 
     useEffect(() => {
-        fetchTransactionHistory();
+        fetchTransactionHistory(); // Chama a função para obter o histórico de transações ao montar o componente
     }, []);
 
     const renderItem = ({
@@ -38,6 +38,7 @@ const Transfer = () => {
         </View>
     );
 
+    // Filtra as transações com base no filtro e no tipo de filtro selecionado
     const filteredTransactions = transactionHistory.filter((item) => {
         if (filterType === "nome") {
             return item.payeer.name

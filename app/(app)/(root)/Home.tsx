@@ -14,7 +14,7 @@ const Home: React.FC = () => {
     const { isLoggedIn, signOut, user, accountInfo, fetchAccountInfo } = useSession();
     const [isVisible, setIsVisible] = useState(false);
 
-    const toggleVisibility = () => {
+    const toggleVisibility = () => { // Função para alternar a visibilidade do saldo
         setIsVisible(!isVisible);
         fetchAccountInfo();
     };
