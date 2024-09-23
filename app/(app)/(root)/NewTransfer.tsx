@@ -114,7 +114,7 @@ const NewTransfer: React.FC = () => {
                             style={styles.backButton}
                             onPress={() => router.push("/Home")}
                         >
-                            <Ionicons name="home" size={24} color="#181C14" />
+                            <Ionicons name="home" size={24} color="#f0f0f0" />
                             <Text style={styles.backButtonText}>Home</Text>
                         </Pressable>
                     </View>
@@ -122,48 +122,56 @@ const NewTransfer: React.FC = () => {
     );
 };
 
+const colors = {
+    text: '#aaf2ff',
+    textwhite:'#f0f0f0',
+    background:'#101010',
+    primary: '#0F4C75',
+    secondary:'#1B262C',
+    accent: '#3282B8',
+};
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#181C14',
+        backgroundColor: colors.background,
         padding: 20,
         justifyContent: 'center',
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#ECDFCC',
+        color: colors.textwhite,
         marginBottom: 20,
         textAlign: 'center',
     },
     form: {
-        backgroundColor: '#3C3D37',
+        backgroundColor: colors.secondary,
         padding: 20,
         borderRadius: 10,
     },
     label: {
         fontSize: 16,
-        color: '#ECDFCC',
+        color: colors.textwhite,
         marginBottom: 5,
     },
     input: {
-        backgroundColor: '#697565',
-        color: '#ECDFCC',
+        backgroundColor: colors.textwhite,
+        color: colors.background,
         padding: 10,
         borderRadius: 5,
         marginBottom: 15,
     },
     errorText: {
         color: 'red',
-        backgroundColor: '#697565',
+        backgroundColor: colors.textwhite,
         padding: 10,
         borderRadius: 5,
         fontSize: 14,
-        fontWeight: 'bold',
         marginBottom: 10,
     },
     button: {
-        backgroundColor: '#697565',
+        backgroundColor: colors.primary,
         padding: 15,
         borderRadius: 5,
         alignItems: 'center',
@@ -177,7 +185,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     buttonText: {
-        color: '#ECDFCC',
+        color: colors.textwhite,
         fontSize: 16,
         fontWeight: 'bold',
     },
@@ -191,13 +199,13 @@ const styles = StyleSheet.create({
     backButton: {
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: "#ECDFCC",
+        backgroundColor: colors.accent,
         padding: 10,
         paddingHorizontal: 40,
         borderRadius: 5,
     },
     backButtonText: {
-        color: "#181C14",
+        color: colors.textwhite,
         fontSize: 16,
         fontWeight: "bold",
         marginLeft: 10,

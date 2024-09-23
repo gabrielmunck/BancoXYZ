@@ -67,7 +67,7 @@ const LoginScreen = () => {
                             <Text style={styles.label}>Login</Text>
                             <TextInput
                                 style={styles.input}
-                                placeholder="Usuário"
+                                placeholder="Email"
                                 placeholderTextColor="#ECDFCC"
                                 value={email}
                                 onChangeText={setEmail}
@@ -100,28 +100,38 @@ const LoginScreen = () => {
     );
 };
 
+const colors = {
+    text: '#aaf2ff',
+    textwhite:'#f0f0f0',
+    background:'#101010',
+    primary: '#0F4C75',
+    secondary:'#1B262C',
+    accent: '#3282B8',
+};
+
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
-        backgroundColor: "#181C14",
+        backgroundColor: colors.background,
     },
     container: {
         flex: 1,
         width: "95%",
-        backgroundColor: "#3C3D37",
+        backgroundColor: colors.secondary,
     },
     header: {
-        height: 100,
-        backgroundColor: "#697565",
+        height: 120,
+        backgroundColor: colors.primary,
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "flex-end",
+        paddingBottom: 20,
         alignItems: "center",
     },
     title: {
-        color: "#ECDFCC",
+        color: colors.textwhite,
         fontSize: 32,
         fontWeight: "bold",
     },
@@ -132,18 +142,16 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 18,
-        color: "#ECDFCC",
+        color: colors.textwhite,
         fontWeight: "bold",
         marginBottom: 10,
     },
     input: {
         height: 40,
-        borderColor: "#697565",
-        borderWidth: 1,
         marginBottom: 20,
         paddingLeft: 8,
-        color: "#ECDFCC",
-        backgroundColor: "#697565",
+        color: colors.text,
+        backgroundColor: colors.accent,
         borderRadius: 5,
     },
     errorText: {
@@ -152,26 +160,26 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     button: {
-        backgroundColor: '#697565',
+        backgroundColor: colors.primary,
         padding: 15,
         borderRadius: 5,
         alignItems: 'center',
         marginTop: 20,
     },
     buttonText: {
-        color: '#ECDFCC',
+        color: colors.textwhite,
         fontSize: 16,
         fontWeight: 'bold',
     },
     footer: {
         height: 60,
-        backgroundColor: "#697565",
+        backgroundColor: colors.accent,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
     },
     footerText: {
-        color: '#ECDFCC',
+        color: '#eae4e3',
         fontSize: 16,
         fontWeight: '100',
     },

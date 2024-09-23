@@ -88,7 +88,7 @@ const Transfer = () => {
                             style={styles.backButton}
                             onPress={() => router.push("/Home")}
                         >
-                            <Ionicons name="home" size={24} color="#181C14" />
+                            <Ionicons name="home" size={24} color="#f0f0f0" />
                             <Text style={styles.backButtonText}>Home</Text>
                         </Pressable>
                     </View>
@@ -98,20 +98,29 @@ const Transfer = () => {
     );
 };
 
+const colors = {
+    text: '#aaf2ff',
+    textwhite:'#f0f0f0',
+    background:'#101010',
+    primary: '#0F4C75',
+    secondary:'#1B262C',
+    accent: '#3282B8',
+};
+
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         width: "100%",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#181C14",
+        backgroundColor: colors.background,
     },
     container: {
         flex: 1,
         width: "95%",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#3C3D37",
+        backgroundColor: colors.secondary,
     },
     filterContainer: {
         flexDirection: 'row',
@@ -124,19 +133,19 @@ const styles = StyleSheet.create({
     filterInput: {
         flex: 1,
         height: 48,
-        borderColor: '#ECDFCC',
+        borderColor: colors.accent,
         borderWidth: 1,
         borderRadius: 5,
         paddingHorizontal: 10,
-        color: '#ECDFCC',
+        color: colors.textwhite,
     },
     filterTypePicker: {
         width: 80,
         height: 48,
         marginLeft: 10,
         borderRadius: 5,
-        backgroundColor: "#697565",
-        color: '#ECDFCC',
+        backgroundColor: colors.accent,
+        color: colors.textwhite,
     },
     transferContainer: {
         flex: 1,
@@ -145,9 +154,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     header: {
-        height: 130,
+        height: 120,
         width: "100%",
-        backgroundColor: "#697565",
+        backgroundColor: colors.primary,
         display: "flex",
         justifyContent: "flex-end",
         alignItems: "center",
@@ -156,23 +165,24 @@ const styles = StyleSheet.create({
     title: {
         alignItems: "center",
         fontSize: 32,
-        color: "#ECDFCC",
+        color: colors.textwhite,
+        fontWeight: "bold",
         marginBottom: 20,
     },
     transactionItem: {
         width: "100%",
         padding: 10,
         borderBottomWidth: 1,
-        borderBottomColor: "#ECDFCC",
+        borderBottomColor: colors.accent,
     },
     transactionTitle: {
-        color: "#ECDFCC",
+        color: colors.textwhite,
         fontSize: 16,
         marginBottom: 5,
         fontWeight: "bold",
     },
     transactionText: {
-        color: "#ECDFCC",
+        color: colors.textwhite,
         fontSize: 16,
         marginBottom: 5,
     },
@@ -181,18 +191,18 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        paddingBottom: 20,
+        paddingVertical: 10,
     },
     backButton: {
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: "#ECDFCC",
+        backgroundColor: colors.accent,
         padding: 10,
-        paddingHorizontal: 40,
+        paddingHorizontal: 20,
         borderRadius: 5,
     },
     backButtonText: {
-        color: "#181C14",
+        color: colors.textwhite,
         fontSize: 16,
         fontWeight: "bold",
         marginLeft: 10,
