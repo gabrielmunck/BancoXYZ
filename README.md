@@ -12,8 +12,8 @@ Este README fornece uma visão geral do projeto BancoXYZ, incluindo instruções
 
 1. Clone o repositório:
 
-   git clone https://github.com/seu-usuario/bancoxyz.git
-   cd bancoxyz
+   ### git clone https://github.com/gabrielmunck/bancoxyz.git
+   ### cd bancoxyz
 
 2. Instale as dependências:
 
