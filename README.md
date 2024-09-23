@@ -23,7 +23,7 @@ Este README fornece uma visão geral do projeto BancoXYZ, incluindo instruções
 
 Para iniciar o aplicativo em modo de desenvolvimento:
 
-   npm expo start
+   npx expo start
 
 ## Testes
 
