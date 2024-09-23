@@ -65,16 +65,18 @@ const Transfer = () => {
                         onChangeText={setFilter}
                         placeholder={`Filtre por ${filterType}`}
                     />
-                    <Picker
-                        selectedValue={filterType}
-                        testID="filter-type-picker"
-                        onValueChange={(itemValue) => setFilterType(itemValue)}
-                        style={styles.filterTypePicker}
-                    >
-                        <Picker.Item label="Nome" value="nome" />
-                        <Picker.Item label="Valor" value="valor" />
-                        <Picker.Item label="Data" value="data" />
-                    </Picker>
+                    <View style={styles.pickerContainer}>
+                        <Picker
+                            selectedValue={filterType}
+                            testID="filter-type-picker"
+                            onValueChange={(itemValue) => setFilterType(itemValue)}
+                            style={styles.filterTypePicker}
+                        >
+                            <Picker.Item label="Nome" value="nome" />
+                            <Picker.Item label="Valor" value="valor" />
+                            <Picker.Item label="Data" value="data" />
+                        </Picker>
+                    </View>
                 </View>
 
                 <View style={styles.transferContainer}>
@@ -135,19 +137,25 @@ const styles = StyleSheet.create({
     filterInput: {
         flex: 1,
         height: 48,
+        backgroundColor: colors.textwhite,
         borderColor: colors.accent,
         borderWidth: 1,
         borderRadius: 5,
         paddingHorizontal: 10,
-        color: colors.textwhite,
+        color: colors.background,
     },
-    filterTypePicker: {
-        width: 80,
+    pickerContainer: {
+        width: 120,
         height: 48,
         marginLeft: 10,
         borderRadius: 5,
         backgroundColor: colors.accent,
-        color: colors.textwhite,
+    },
+    filterTypePicker: {
+        width: '100%',
+        height: '100%',
+        fontSize: 16,
+        color: colors.background,
     },
     transferContainer: {
         flex: 1,
