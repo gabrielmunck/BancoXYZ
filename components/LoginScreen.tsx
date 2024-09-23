@@ -61,14 +61,14 @@ const LoginScreen = () => {
                 </View>
                 <View style={styles.contentContainer}>
                     {isLoading ? (
-                        <ActivityIndicator size="large" color="#ECDFCC" />
+                        <ActivityIndicator size="large" color="#f0f0f0" />
                     ) : (
                         <>
                             <Text style={styles.label}>Login</Text>
                             <TextInput
                                 style={styles.input}
                                 placeholder="Email"
-                                placeholderTextColor="#ECDFCC"
+                                placeholderTextColor="#f0f0f0"
                                 value={email}
                                 onChangeText={setEmail}
                             />
@@ -77,7 +77,7 @@ const LoginScreen = () => {
                             <TextInput
                                 style={styles.input}
                                 placeholder="Senha"
-                                placeholderTextColor="#ECDFCC"
+                                placeholderTextColor="#f0f0f0"
                                 value={password}
                                 onChangeText={setPassword}
                                 secureTextEntry

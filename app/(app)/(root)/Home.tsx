@@ -69,7 +69,6 @@ const Home: React.FC = () => {
                         <Pressable
                             style={styles.logoutButton}
                             onPress={signOut}
-                            testID="logout-button"
                         >
                             <Text style={styles.logoutButtonText}>Sair</Text>
                         </Pressable>

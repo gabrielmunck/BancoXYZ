@@ -66,6 +66,7 @@ const Transfer = () => {
                     />
                     <Picker
                         selectedValue={filterType}
+                        testID="filter-type-picker"
                         onValueChange={(itemValue) => setFilterType(itemValue)}
                         style={styles.filterTypePicker}
                     >
