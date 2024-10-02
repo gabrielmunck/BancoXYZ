@@ -76,7 +76,7 @@ export function SessionProvider({ children }: PropsWithChildren) {
     const fetchAccountInfo = async () => {
         try {
             const response = await axios.get(
-                "https://2k0ic4z7s5.execute-api.us-east-1.amazonaws.com/default/balance",
+                "https://apii.banco.com/account",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -98,7 +98,7 @@ export function SessionProvider({ children }: PropsWithChildren) {
     const fetchTransactionHistory = async () => {
         try {
             const response = await axios.get(
-                "https://n0qaa2fx3c.execute-api.us-east-1.amazonaws.com/default/transferList",
+                "https://apiii.banco.com/transfers",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -122,7 +122,7 @@ export function SessionProvider({ children }: PropsWithChildren) {
         try {
             setIsLoading(true);
             const response = await axios.post(
-                "https://qf5k9fspl0.execute-api.us-east-1.amazonaws.com/default/login",
+                "https://api.banco.com/login",
                 {
                     email,
                     password,

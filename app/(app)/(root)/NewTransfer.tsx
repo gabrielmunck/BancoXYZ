@@ -23,7 +23,7 @@ const NewTransfer: React.FC = () => {
         if(isValueValid && isDocumentValid && isDateValid){
             try {
                 const response = await axios.post(
-                'https://ofqx4zxgcf.execute-api.us-east-1.amazonaws.com/default/transfer',
+                'https://api.banco.com/newtransfer',
                 {
                     value: parseFloat(value),
                     currency: 'USD',

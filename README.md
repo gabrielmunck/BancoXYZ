@@ -54,3 +54,6 @@ Para executar os testes:
 -   Jest
 -   Axios
 
+## Notas Importantes
+
+- O Link para acesso a api é um exemplo, ja que o verdadeiro link é privado.
